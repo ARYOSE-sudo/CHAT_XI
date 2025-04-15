@@ -3,13 +3,13 @@ from socket import *
 
 # socket client
 client = socket(AF_INET, SOCK_STREAM)
-client.connect(('192.168.1.7', 4422))  # بدل IP ديالك هنا
+client.connect(('192.168.1.7', 4422))  # بدّل IP ديالك هنا
 
 def main(page: Page):
-    page.window.width = 390
-    page.window.height = 740
+    page.window.width = page.window.width  # يجعل العرض مرن حسب الشاشة
+    page.window.height = page.window.height  # يجعل الارتفاع مرن حسب الشاشة
     page.window.top = 0
-    page.window.left = 1140
+    page.window.left = 0
     page.window.title_bar_hidden = True
 
     messages = Column(scroll="auto")
@@ -18,7 +18,7 @@ def main(page: Page):
         border_color=colors.WHITE,
         bgcolor=colors.WHITE,
         border_radius=20,
-        width=290,
+        width=page.window.width * 0.8,  # 80% من عرض الشاشة
         height=40,
         color="black"
     )
@@ -78,11 +78,11 @@ def main(page: Page):
                             controls=[
                                 Container(
                                     content=messages,
-                                    height=640,
+                                    height=page.window.height * 0.85,  # 85% من ارتفاع الشاشة
                                     padding=10
                                 ),
                                 Container(
-                                    width=390,
+                                    width=page.window.width,
                                     height=60,
                                     bgcolor=colors.BLACK,
                                     content=Row(
@@ -127,8 +127,8 @@ def main(page: Page):
                                 shape=ContinuousRectangleBorder(radius=10),
                                 shadow_color="#00FFFF"
                             ),
-                            top=678,
-                            left=260,
+                            top=page.window.height * 0.85,  # نسبة من ارتفاع الشاشة
+                            left=page.window.width * 0.6,  # نسبة من عرض الشاشة
                             bgcolor="#00FFFF",
                             on_click=chat
                         )
